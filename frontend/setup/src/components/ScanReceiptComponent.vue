@@ -1,13 +1,7 @@
-<template>
-    <div>
-        <video v-if="!isCaptured" ref="videoRef" class="m-auto mt-10 w-100 h-160 bg-blue-100 rounded object-cover" autoplay playsinline></video>
-        <canvas v-if="isCaptured" class="m-auto mt-10 w-100 h-160 bg-blue-100 rounded border-4 border-green-600" :style="{ backgroundImage: `url(${imageURL})` }"></canvas>
-        <button @click="capturePhoto" class="mt-10 m-auto p-2 bg-blue-600 text-white rounded block">Capture</button>
-    </div>
-</template>
 
 <script setup>
-import { defineProps, defineEmits, onMounted, ref } from 'vue';
+import { defineProps, defineEmits, onMounted, ref, resolveComponent } from 'vue';
+import { RouterLink } from 'vue-router';
 
 const videoRef = ref(null);
 let imageURL = null;
@@ -34,7 +28,7 @@ onMounted(() => {
  * Capture a photo from the video stream and display it on a canvas
  * with the canvas width and height calculated at runtime to achieve
  * correct display in the container with the same size as the <video> tag.
- */
+    */
 const capturePhoto = () => {
     const canvas = document.createElement('canvas');
     const context = canvas.getContext('2d');
@@ -88,3 +82,14 @@ const capturePhoto = () => {
 };
 
 </script>
+
+<template>
+    <div>
+        <video v-if="!isCaptured" ref="videoRef" class="m-auto mt-10 w-100 h-160 bg-blue-100 rounded object-cover" autoplay playsinline></video>
+        <canvas v-if="isCaptured" class="m-auto mt-10 w-100 h-160 bg-blue-100 rounded border-4 border-green-600" :style="{ backgroundImage: `url(${imageURL})` }"></canvas>
+        <button v-if="!isCaptured" @click="capturePhoto" class="mt-10 m-auto p-2 bg-blue-600 text-white rounded block">Capture</button>
+        <RouterLink v-if="isCaptured" to="/scanned-data">
+            <button class="mt-10 m-auto p-2 bg-blue-600 text-white rounded block">View scanned data</button>
+        </RouterLink>
+    </div>
+</template>
