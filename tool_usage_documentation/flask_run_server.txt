@@ -1,0 +1,23 @@
+To start the server, run this command
+    pipenv run flask --debug run -h 0.0.0.0
+
+But it will run on the Flask's default port 5000, 
+which is already taken on MacOS. You have to bind a different
+port (e.g. 5001) by running:
+    flask run --port 5001
+or
+    flask run -p 5001
+
+For more help info run:
+    flask run --help
+
+To see anything in the browser (GET results), enter
+the link + route that is marked above the GET method
+in the backend/src/index.py file, e.g.:
+    http://127.0.0.1:5001/incomes
+    http://127.0.0.1:PORT/route-url-above-get-method
+
+
+
+The whole thing was set up by following this blog/tutorial
+https://auth0.com/blog/developing-restful-apis-with-python-and-flask/ 

@@ -1,0 +1,8 @@
+To GET run this in bash terminal:
+    curl http://127.0.0.1:PORT/route-url-above-get-method
+
+To POST run this in bash terminal (\ just splits the command into several lines):
+    curl -X POST http://127.0.0.1:5000/incomes \
+    -H "Content-Type: application/json" \
+    -d '{"description": "freelance", "amount": 2000}'
+
