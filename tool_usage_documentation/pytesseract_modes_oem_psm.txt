@@ -1,0 +1,40 @@
+Tesseract OCR - psm and oem Guide
+==================================
+
+psm: Page Segmentation Mode
+------------------------------------------------------------------------------------
+This tells Tesseract how to segment the page before reading text.
+It controls the layout assumption — single line, block, paragraph, sparse text, etc.
+------------------------------------------------------------------------------------
+  0  - Orientation and script detection (OSD) only.
+  1  - Automatic page segmentation with OSD.
+  2  - Automatic page segmentation, no OSD or OCR.
+  3  - Fully automatic page segmentation (default).
+  4  - Assume a single column of text of variable sizes.
+  5  - Assume a single uniform block of vertically aligned text.
+  6  - Assume a single uniform block of text.
+  7  - Treat the image as a single text line.
+  8  - Treat the image as a single word.
+  9  - Treat the image as a single word in a circle.
+ 10  - Treat the image as a single character.
+ 11  - Sparse text. Find as much text as possible in no particular order.
+ 12  - Sparse text with OSD.
+ 13  - Raw line. Treat the image as a single text line, skipping Tesseract-specific hacks.
+
+
+oem: OCR Engine Mode
+-------------------------------------
+This selects which OCR engine to use:
+-------------------------------------
+
+  0 - Legacy engine only                                    NOT WORKING
+  1 - LSTM neural net engine only (modern, accurate)
+  2 - Legacy + LSTM combined                                NOT WORKING
+  3 - Default: LSTM, fall back if needed (recommended)
+
+
+Best options for receipts:
+---------------------------------------------------------------
+--psm 6 = Assume a single uniform block of text (recommended)
+--psm 4 = Single column (if structured vertically)
+--psm 11 = Sparse text (for messy layouts)
